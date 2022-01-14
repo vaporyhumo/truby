@@ -18,7 +18,7 @@ RSpec.configure do |config|
   config.example_status_persistence_file_path = "spec/examples.txt"
   config.default_formatter = "doc" if config.files_to_run.one?
   config.warnings = true
-  config.profile_examples = 10
+  config.profile_examples = 0
   config.order = :random
   Kernel.srand config.seed
 end
