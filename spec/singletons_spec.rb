@@ -1,27 +1,15 @@
 # frozen_string_literal: true
 
 describe Truby do
-  it do
-    expect(described_class.transpile(<<~INPUT.chomp)).to eq(<<~OUTPUT.chomp)
-      nil
-    INPUT
-      nil
-    OUTPUT
+  describe '.transpile' do
+    specify { expect(described_class.transpile('nil')).to eq('nil') }
+    specify { expect(described_class.transpile('true')).to eq('true') }
+    specify { expect(described_class.transpile('false')).to eq('false') }
   end
 
-  it do
-    expect(described_class.transpile(<<~INPUT.chomp)).to eq(<<~OUTPUT.chomp)
-      true
-    INPUT
-      true
-    OUTPUT
-  end
-
-  it do
-    expect(described_class.transpile(<<~INPUT.chomp)).to eq(<<~OUTPUT.chomp)
-      false
-    INPUT
-      false
-    OUTPUT
+  describe '.lex' do
+    specify { expect(described_class.lex('nil')).to eq([[:nil]]) }
+    specify { expect(described_class.lex('true')).to eq([[:true]]) }
+    specify { expect(described_class.lex('false')).to eq([[:false]]) }
   end
 end
