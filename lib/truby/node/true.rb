@@ -8,15 +8,15 @@ module Truby
       end
 
       def transpile
-        String 'true'
+        'true'
       end
 
       def unparse
-        String 'true'
+        'true'
       end
 
       def == other
-        Boolean other.instance_of? self.class
+        other.instance_of? self.class
       end
     end
   end

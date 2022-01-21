@@ -5,7 +5,7 @@ module Truby
     SINGLETONS = %w[false nil true].freeze
 
     def self.=== obj
-      Boolean SINGLETONS.include? String obj
+      SINGLETONS.include? obj
     end
   end
 end

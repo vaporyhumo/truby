@@ -8,7 +8,7 @@ module Truby
       end
 
       def add token
-        Node case token.type
+        case token.type
         when :false then Node::false
         when :nil   then Node::nil
         when :true  then Node::true

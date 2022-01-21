@@ -9,7 +9,7 @@ module Truby
       attr_reader :value
 
       def == other
-        Boolean other.instance_of?(self.class) && other.value == value
+        other.instance_of?(self.class) && other.value == value
       end
 
       def unparse

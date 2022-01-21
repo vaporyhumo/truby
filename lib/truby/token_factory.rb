@@ -15,12 +15,12 @@ module Truby
     end
 
     def self.for(lexeme)
-      case String lexeme
+      case lexeme
       when Singleton then send lexeme
       when /-?\d+/   then Token::new :int, lexeme
       when /:[a-z]+/ then Token::new :symbol, lexeme
       when String    then Token::new :id,  lexeme
-      end.tap { Token _1 }
+      end
     end
   end
 end

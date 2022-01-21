@@ -3,23 +3,23 @@
 module Truby
   class Node
     def self.empty
-      Node Empty::new
+      Empty::new
     end
 
     def self.false
-      Node False::new
+      False::new
     end
 
     def self.nil
-      Node Nil::new
+      Nil::new
     end
 
     def self.true
-      Node True::new
+      True::new
     end
 
     def self.int value
-      Node Int::new value
+      Int::new value
     end
   end
 end
