@@ -12,6 +12,7 @@ require_relative 'truby/node/false'
 require_relative 'truby/node/int'
 require_relative 'truby/node/nil'
 require_relative 'truby/node/true'
+require_relative 'truby/parser'
 require_relative 'truby/singleton'
 require_relative 'truby/token'
 require_relative 'truby/token_list'
@@ -23,11 +24,7 @@ module Truby
   end
 
   def self.parse string
-    lex(string).tokens.reduce Node.empty, &method(:parse_step)
-  end
-
-  def self.parse_step node, token
-    node.add token
+    Parser.(string)
   end
 
   def self.transpile string
