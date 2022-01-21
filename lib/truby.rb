@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'sorbet-runtime'
+
 require_relative 'truby/config'
 require_relative 'truby/equality'
 require_relative 'truby/data_type'
