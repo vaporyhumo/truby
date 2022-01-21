@@ -7,8 +7,13 @@ module Truby
         @type = :empty
       end
 
-      def to_s
-        'empty'
+      def add token
+        Node case token.type
+        when :false then Node::false
+        when :nil   then Node::nil
+        when :true  then Node::true
+        when :int   then Node::int token.value
+        end
       end
     end
   end
