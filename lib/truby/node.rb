@@ -21,5 +21,8 @@ module Truby
     def self.int value
       Int::new value
     end
+
+    def add token
+    end
   end
 end

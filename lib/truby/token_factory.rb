@@ -1,9 +1,8 @@
+# typed: true
 # frozen_string_literal: true
 
 module Truby
   module TokenFactory
-    extend T::Sig
-
     sig { returns Token }
     def self.nil
       Token::new :nil, Config::NIL
@@ -19,7 +18,6 @@ module Truby
       Token::new :false, Config::FALSE
     end
 
-    NilToken = T.type_alias { T.nilable Token }
     sig { params(lexeme: String).returns NilToken }
     def self.for(lexeme)
       case lexeme

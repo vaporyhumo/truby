@@ -2,6 +2,10 @@
 
 require 'sorbet-runtime'
 
+class Module
+  include T::Sig
+end
+
 require_relative 'truby/config'
 require_relative 'truby/equality'
 require_relative 'truby/data_type'
@@ -17,6 +21,7 @@ require_relative 'truby/singleton'
 require_relative 'truby/token'
 require_relative 'truby/token_list'
 require_relative 'truby/token_factory'
+require_relative 'truby/type_alias'
 
 module Truby
   def self.lex string
