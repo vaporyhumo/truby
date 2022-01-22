@@ -2,8 +2,10 @@
 # frozen_string_literal: true
 
 module Truby
-  class Node
-    class Empty < Node
+  module Node
+    class Empty
+      include Node
+
       def initialize
         @type = :empty
       end
@@ -11,11 +13,12 @@ module Truby
       sig { params(token: Token).returns Node }
       def add token
         case token.type
-        when :false then Node::false
-        when :nil   then Node::nil
-        when :true  then Node::true
-        when :int   then Node::int token.value
-        else raise 'invalid node type'
+        when TokenType::False then Node::false
+        when TokenType::Nil   then Node::nil
+        when TokenType::True  then Node::true
+        when TokenType::Int   then Node::int token.value
+        when TokenType::Id    then Send::new receiver: nil, message: token.value, tokens: [token]
+        else raise TypeError, "Invalid TokenType #{token.type}"
         end
       end
     end

@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 module Truby
-  class Node
-    class Nil < self
+  module Node
+    class Nil
+      include Node
+
       def initialize _type = nil
         @type = :nil
       end

@@ -1,8 +1,9 @@
 module Truby
-  class Node
-    class Int < self
-      def initialize _type = nil, value
-        @type = :int
+  module Node
+    class Int
+      include Node
+
+      def initialize value
         @value = value
       end
 

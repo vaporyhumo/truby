@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 module Truby
-  class Node
-    class False < self
+  module Node
+    class False
       include Equality
+      include Node
 
       def initialize _type = nil
         @type = :false

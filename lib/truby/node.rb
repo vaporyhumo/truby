@@ -1,7 +1,8 @@
+# typed: true
 # frozen_string_literal: true
 
 module Truby
-  class Node
+  module Node
     def self.empty
       Empty::new
     end
@@ -23,6 +24,8 @@ module Truby
     end
 
     def add token
+      T.bind(self, Object)
+      Kernel::raise "Cannot add #{token.inspect} to #{self.inspect}"
     end
   end
 end
