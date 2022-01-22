@@ -1,27 +1,15 @@
 # frozen_string_literal: true
 
 require 'sorbet-runtime'
+require "zeitwerk"
 
 class Module
   include T::Sig
 end
 
-require_relative 'truby/config'
-require_relative 'truby/equality'
-require_relative 'truby/data_type'
-require_relative 'truby/lexer'
-require_relative 'truby/node'
-require_relative 'truby/node/empty'
-require_relative 'truby/node/false'
-require_relative 'truby/node/int'
-require_relative 'truby/node/nil'
-require_relative 'truby/node/true'
-require_relative 'truby/parser'
-require_relative 'truby/singleton'
-require_relative 'truby/token'
-require_relative 'truby/token_list'
-require_relative 'truby/token_factory'
-require_relative 'truby/type_alias'
+loader = Zeitwerk::Loader.for_gem
+loader.enable_reloading
+loader.setup
 
 module Truby
   def self.lex string
@@ -40,3 +28,6 @@ module Truby
     parse(string).unparse
   end
 end
+
+require_relative 'truby/type_alias'
+loader.eager_load
