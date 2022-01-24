@@ -16,9 +16,9 @@ module Truby
         'true'
       end
 
-      sig { params(other: Object).returns T::Boolean }
-      def == other
-        other.instance_of? self.class
+      sig { override.returns String }
+      def inspect
+        '(true)'
       end
     end
   end
