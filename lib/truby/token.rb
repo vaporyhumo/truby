@@ -18,5 +18,10 @@ module Truby
 
     sig { returns String }
     attr_reader :value
+
+    sig { returns String }
+    def inspect
+      "[#{@type.serialize} #{@value}]"
+    end
   end
 end
