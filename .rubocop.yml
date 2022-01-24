@@ -1,0 +1,8 @@
+---
+AllCops:
+  EnabledByDefault: false
+  DisabledByDefault: true
+  SuggestExtensions: false
+
+Lint:
+  Enabled: true
