@@ -1,0 +1,16 @@
+---
+includes:
+  - lib
+
+requires:
+  - truby
+
+integration: rspec
+
+matcher:
+  subjects:
+    - Truby
+    - Truby::Config
+    - Truby::Token
+
+fail_fast: true
