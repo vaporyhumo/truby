@@ -21,7 +21,7 @@ module Truby
 
     sig { returns String }
     def inspect
-      "[#{@type.serialize} #{@value}]"
+      "[#{type.serialize} #{value}]"
     end
   end
 end
