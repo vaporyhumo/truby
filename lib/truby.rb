@@ -1,3 +1,4 @@
+# typed: strict
 # frozen_string_literal: true
 
 require 'sorbet-runtime'
@@ -12,20 +13,14 @@ loader.enable_reloading
 loader.setup
 
 module Truby
+  sig { params(string: String).returns(Truby::TokenList) }
   def self.lex string
     Lexer.(string)
   end
 
+  sig { params(string: String).returns(Truby::Node) }
   def self.parse string
     Parser.(string)
-  end
-
-  def self.transpile string
-    parse(string).transpile
-  end
-
-  def self.rewrite string
-    parse(string).unparse
   end
 end
 
