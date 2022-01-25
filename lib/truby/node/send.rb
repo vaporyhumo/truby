@@ -14,6 +14,9 @@ module Truby
         @tokens = tokens
       end
 
+      sig { returns T::Array[Token] }
+      attr_reader :tokens
+
       sig { params(token: Token).returns Node }
       def add token
         case token.type

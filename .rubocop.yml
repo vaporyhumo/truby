@@ -3,6 +3,16 @@ AllCops:
   EnabledByDefault: false
   DisabledByDefault: true
   SuggestExtensions: false
+  NewCops: enable
 
 Lint:
+  Enabled: true
+
+Lint/AmbiguousOperator:
+  Enabled: false
+
+Lint/BooleanSymbol:
+  Enabled: false
+
+Metrics:
   Enabled: true

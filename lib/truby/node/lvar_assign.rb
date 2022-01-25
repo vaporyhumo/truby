@@ -19,6 +19,9 @@ module Truby
       sig { returns NilNode }
       attr_reader :value
 
+      sig { returns T::Array[Token] }
+      attr_reader :tokens
+
       sig { override.returns String }
       def inspect
         "(lvarasgn #{id} #{value.inspect})"
@@ -28,7 +31,7 @@ module Truby
       def add token
         unless value
           case token.type
-          when TokenType::True then Node::lvar_assign @id, Node::true, [*@tokens, token]
+          when TokenType::True then Node::lvar_assign @id, Node::True::new([token]), [*@tokens, token]
           else super
           end
         else

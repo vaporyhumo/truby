@@ -12,31 +12,6 @@ module Truby
       Empty::new
     end
 
-    sig { returns Node::False  }
-    def self.false
-      False::new
-    end
-
-    sig { returns Node::Nil  }
-    def self.nil
-      Nil::new
-    end
-
-    sig { returns Node::True  }
-    def self.true
-      True::new
-    end
-
-    sig { params(value: String).returns Node::Int  }
-    def self.int value
-      Int::new value
-    end
-
-    sig { params(other: Node).returns T::Boolean }
-    def == other
-      other.inspect == inspect
-    end
-
     sig { params(id: String, value: NilNode, tokens: T::Array[Token]).returns Node::LvarAssign }
     def self.lvar_assign id, value, tokens
       LvarAssign::new id, value, tokens
@@ -50,5 +25,16 @@ module Truby
 
     sig { abstract.returns String }
     def inspect; end
+
+    sig { abstract.returns T::Array[Token] }
+    def tokens
+    end
+
+    sig { params(other: Object).returns(T::Boolean) }
+    def == other
+      return false unless other.is_a?(Node)
+
+      tokens.zip(other.tokens).all? { |a, b| a == b }
+    end
   end
 end
