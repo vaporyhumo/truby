@@ -24,5 +24,11 @@ module Truby
   end
 end
 
+module Kernel
+  def t(symbol, string)
+    Truby::Token.new(symbol, string)
+  end
+end
+
 require_relative 'truby/type_alias'
 loader.eager_load
