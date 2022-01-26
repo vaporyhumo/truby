@@ -11,6 +11,7 @@ module Truby
     def initialize(type, value)
       @type = T.let(TokenType::deserialize(type.to_s), TokenType)
       @value = value
+      freeze
     end
 
     sig { returns TokenType }

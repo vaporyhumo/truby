@@ -21,7 +21,7 @@ module Truby
     sig { params(lexeme: String).returns NilToken }
     def self.for(lexeme)
       case lexeme
-      when Singleton     then send lexeme
+      when Singleton     then public_send lexeme
       when '-'           then Token::new :minus, lexeme
       when '='           then Token::new :assign, lexeme
       when /-?\d+/       then Token::new :int, lexeme
