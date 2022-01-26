@@ -11,6 +11,8 @@ matcher:
   subjects:
     - Truby
     - Truby::Config
+    - Truby::Equality
+    - Truby::Lexer
     - Truby::Node
     - Truby::Parser
     - Truby::Singleton
