@@ -11,6 +11,17 @@ matcher:
   subjects:
     - Truby
     - Truby::Config
+    - Truby::Node
+    - Truby::Parser
+    - Truby::Singleton
+    - Truby::TokenFactory
+    - Truby::TokenList
+    - Truby::TokenType
     - Truby::Token
+  ignore:
+    - Truby::Node#inspect
+    - Truby::Node#tokens
+    - Truby::TokenList#new_token_list_with_new_token_for
+    - Truby::Token#initialize
 
 fail_fast: true

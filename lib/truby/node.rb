@@ -4,6 +4,7 @@
 module Truby
   module Node
     extend T::Helpers
+    include Kernel
 
     abstract!
 
@@ -12,15 +13,9 @@ module Truby
       Empty::new
     end
 
-    sig { params(id: String, value: NilNode, tokens: T::Array[Token]).returns Node::LvarAssign }
-    def self.lvar_assign id, value, tokens
-      LvarAssign::new id, value, tokens
-    end
-
     sig { params(token: Token).returns Node  }
     def add token
-      T.bind(self, Object)
-      Kernel::raise "Cannot add #{token.inspect} to #{self.inspect}"
+      raise ArgumentError, "Cannot add #{token.inspect} to #{inspect}"
     end
 
     sig { abstract.returns String }
@@ -30,11 +25,10 @@ module Truby
     def tokens
     end
 
-    sig { params(other: Object).returns(T::Boolean) }
+    sig { params(other: Node).returns(T::Boolean) }
     def == other
-      return false unless other.is_a?(Node)
-
-      tokens.zip(other.tokens).all? { |a, b| a == b }
+      tokens.size.equal?(other.tokens.size) &&
+        tokens.zip(other.tokens).all? { |a, b| a.eql? b } && self.class.equal?(other.class)
     end
   end
 end
