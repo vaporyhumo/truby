@@ -12,24 +12,12 @@ module Truby
         @tokens = tokens
       end
 
-      sig { returns T::Array[Token] }
+      sig { override.returns T::Array[Token] }
       attr_reader :tokens
 
-      sig { returns String }
-      def transpile
-        'true'
-      end
-
-      sig { returns String }
-      def unparse
-        'true'
-      end
-
-      sig { params(other: Object).returns(T::Boolean) }
-      def == other
-        return false unless other.is_a?(True)
-
-        tokens.zip(other.tokens).all? { |a, b| a == b }
+      sig { override.returns String }
+      def inspect
+        '(true)'
       end
     end
   end

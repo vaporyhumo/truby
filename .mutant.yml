@@ -14,6 +14,13 @@ matcher:
     - Truby::Equality
     - Truby::Lexer
     - Truby::Node
+    - Truby::Node::Empty
+    - Truby::Node::False
+    - Truby::Node::Int
+    - Truby::Node::LvarAssign
+    - Truby::Node::Nil
+    - Truby::Node::Send
+    - Truby::Node::True
     - Truby::Parser
     - Truby::Singleton
     - Truby::TokenFactory

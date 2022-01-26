@@ -15,16 +15,6 @@ module Truby
       sig { override.returns T::Array[Token] }
       attr_reader :tokens
 
-      sig { returns String }
-      def transpile
-        'false'
-      end
-
-      sig { returns String }
-      def unparse
-        'false'
-      end
-
       sig {override.returns(String)}
       def inspect
         '(false)'
