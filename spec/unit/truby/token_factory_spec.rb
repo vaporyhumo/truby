@@ -48,4 +48,54 @@ describe Truby::TokenFactory do
 
     specify { assert_equal actual, expected }
   end
+
+  describe '.for' do
+    context 'when given "-"' do
+      let(:actual) { described_class.for('-') }
+      let(:expected) { Truby::Token.new(:minus, '-') }
+
+      specify { assert_equal actual, expected }
+    end
+
+    context 'when given "="' do
+      let(:actual) { described_class.for('=') }
+      let(:expected) { Truby::Token.new(:assign, '=') }
+
+      specify { assert_equal actual, expected }
+    end
+
+    context 'when given "1"' do
+      let(:actual) { described_class.for('1') }
+      let(:expected) { Truby::Token.new(:int, '1') }
+
+      specify { assert_equal actual, expected }
+    end
+
+    context 'when given ":"' do
+      let(:actual) { described_class.for(':') }
+      let(:expected) { Truby::Token.new(:colon, ':') }
+
+      specify { assert_equal actual, expected }
+    end
+
+    context 'when given ":foo"' do
+      let(:actual) { described_class.for(':foo') }
+      let(:expected) { Truby::Token.new(:symbol, ':foo') }
+
+      specify { assert_equal actual, expected }
+    end
+
+    context 'when given "foo"' do
+      let(:actual) { described_class.for('foo') }
+      let(:expected) { Truby::Token.new(:id, 'foo') }
+
+      specify { assert_equal actual, expected }
+    end
+
+    context 'when given ";"' do
+      let(:actual) { described_class.for(';') }
+
+      specify { assert_equal actual, nil }
+    end
+  end
 end

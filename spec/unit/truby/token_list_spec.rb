@@ -7,6 +7,11 @@ describe Truby::TokenList do
     }
   end
 
+  describe '#initialize' do
+    specify { expect(described_class.new([])).to be_frozen }
+    specify { expect(described_class.new([]).tokens).to match([]) }
+  end
+
   describe '#==' do
     specify {
       expect(t([[:id, 'foo'], [:id, 'bar']])).to eq(t([[:id, 'foo'], [:id, 'bar']]))
