@@ -7,7 +7,7 @@ module Truby
 
     sig { params(string: String).returns Node }
     def self.call string
-      Lexer.(string).tokens.reduce Node.empty, &method(:parse_step)
+      Lexer.(string).tokens.reduce Node.empty, &public_method(:parse_step)
     end
 
     sig { params(node: Node, token: Token).returns Node }
