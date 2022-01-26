@@ -25,8 +25,16 @@ module Truby
 end
 
 module Kernel
-  def t(symbol, string)
-    Truby::Token.new(symbol, string)
+  sig {
+    params(symbol_or_array: T.any(Symbol, T::Array[[Symbol, String]]), string: T.nilable(String))
+      .returns(T.any(Truby::Token, Truby::TokenList))
+  }
+  def t(symbol_or_array, string = nil)
+    case symbol_or_array
+    when Symbol then Truby::Token.new(symbol_or_array, T.must(string))
+    when Array then Truby::TokenList.new(symbol_or_array.map { |(symbol, value)| Truby::Token.new(symbol, value) })
+    else T.absurd(symbol_or_array)
+    end
   end
 end
 
