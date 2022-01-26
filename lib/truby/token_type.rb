@@ -13,6 +13,8 @@ module Truby
       Nil    = new
       Symbol = new
       True   = new
+
+      Debug  = new
     end
   end
 end
