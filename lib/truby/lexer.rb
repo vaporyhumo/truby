@@ -3,7 +3,7 @@
 module Truby
   module Lexer
     def self.call string
-      string.each_char.reduce TokenList::empty, &method(:step)
+      string.each_char.reduce TokenList::empty, &public_method(:step)
     end
 
     def self.step tokens, char
