@@ -2,24 +2,28 @@
 # frozen_string_literal: true
 
 describe Truby::Parser do
+  describe '.parse_step' do
+    specify {
+      node = Truby::Node::Empty.new
+      token = Truby::Token::new(:id, 'foo')
+      allow(node).to receive(:add).and_call_original
+      Truby::Parser.parse_step(node, token)
+      expect(node).to have_received(:add).with(token)
+    }
+  end
+
   describe '.call' do
     let(:actual) { described_class.call(input) }
 
     context 'when given "false"' do
-      specify do
-        require_relative '../examples/false'
-        Truby::Integrations::False.tap do |integration|
-          expect(integration.lex).to eq(integration.tokens)
-          expect(integration.parse).to eq(integration.node)
-        end
-      end
+      specify { expect(described_class.('false')).to   eq(Truby::Node::False::new [Truby::Token::new(:false, 'false')]) }
     end
 
-    xcontext 'when given "nil"' do
+    context 'when given "nil"' do
       specify { expect(described_class.('nil')).to   eq(Truby::Node::Nil::new [Truby::Token::new(:nil, 'nil')]) }
     end
 
-    xcontext 'when given "true"' do
+    context 'when given "true"' do
       specify { expect(described_class.('true')).to  eq(Truby::Node::True::new [Truby::Token::new(:true, 'true')]) }
     end
 
