@@ -23,9 +23,7 @@ module Truby
         end
       end
 
-      define_singleton_method :__type do
-        attributes
-      end
+      define_singleton_method(:__type) { attributes }
 
       attr_reader *attributes.keys
       define_equality *attributes.keys
