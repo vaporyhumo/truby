@@ -14,21 +14,27 @@ module Truby
         @tokens = tokens
       end
 
-      sig { returns T::Array[Token] }
+      sig { override.returns T::Array[Token] }
       attr_reader :tokens
+
+      sig { returns String }
+      attr_reader :message
+
+      sig { returns NilNode }
+      attr_reader :receiver
 
       sig { params(token: Token).returns Node }
       def add token
         case token.type
-        when TokenType::Assign then Node::lvar_assign @message, nil, [*@tokens, token]
-        else super
+        when TokenType::Assign then LvarAssign::new message, nil, [*tokens, token]
+        # else super
         end
       end
 
 
       sig { override.returns String }
       def inspect
-        "(send #{@receiver.inspect} #{@message})"
+        "(send #{receiver.inspect} #{message})"
       end
     end
   end

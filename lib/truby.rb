@@ -33,7 +33,9 @@ module Kernel
     case symbol_or_array
     when Symbol then Truby::Token.new(symbol_or_array, T.must(string))
     when Array then Truby::TokenList.new(symbol_or_array.map { |(symbol, value)| Truby::Token.new(symbol, value) })
+    # :nocov:
     else T.absurd(symbol_or_array)
+    # :nocov:
     end
   end
 end
