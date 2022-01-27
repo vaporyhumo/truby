@@ -33,4 +33,4 @@ matcher:
     - Truby::TokenList#new_token_list_with_new_token_for
     - Truby::Token#initialize
 
-fail_fast: true
+fail_fast: false
