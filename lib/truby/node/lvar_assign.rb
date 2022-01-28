@@ -29,10 +29,11 @@ module Truby
 
       sig { params(token: Token).returns Node }
       def add token
-        case token.type
-        when TokenType::True then LvarAssign::new id, True::new([token]), [*tokens, token]
+        # case token.type
+        # when TokenType::True then
+        LvarAssign::new id, True::new([token]), [*tokens, token]
         # else super
-        end
+        # end
       end
     end
   end

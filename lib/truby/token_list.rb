@@ -51,8 +51,6 @@ module Truby
     sig { params(char: String).returns TokenList }
     def new_token_list_with_new_token_for char
       TokenList::new [*tokens, T.must(TokenFactory::for(char))]
-    rescue TypeError
-      raise TypeError, "Could not create token for #{char.inspect}"
     end
 
     sig { params(char: String).returns String }
