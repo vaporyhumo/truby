@@ -32,19 +32,19 @@ describe Truby::TokenList do
 
   describe '#add' do
     specify {
-      expect(t([]).add('f')).to eq t([[:id, 'f']])
+      expect(t([]).add(Truby::Char::new(char: 'f'))).to eq t([[:id, 'f']])
     }
 
     specify {
-      expect(t([[:id, 'f']]).add('o')).to eq t([[:id, 'fo']])
+      expect(t([[:id, 'f']]).add(Truby::Char::new(char: 'o'))).to eq t([[:id, 'fo']])
     }
 
     specify {
-      expect(t([[:id, 'f']]).add('=')).to eq t([[:id, 'f'], [:assign, '=']])
+      expect(t([[:id, 'f']]).add(Truby::Char::new(char: '='))).to eq t([[:id, 'f'], [:assign, '=']])
     }
 
     specify {
-      expect(t([[:id, 'f']]).add('=').add('f')).to eq t([[:id, 'f'], [:assign, '='], [:id, 'f']])
+      expect(t([[:id, 'f']]).add(Truby::Char::new(char: '=')).add(Truby::Char::new(char: 'f'))).to eq t([[:id, 'f'], [:assign, '='], [:id, 'f']])
     }
   end
 

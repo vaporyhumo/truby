@@ -22,6 +22,7 @@ module Truby
         when TokenType::True  then True::new [token]
         when TokenType::Int   then Int::new token.value, [token]
         when TokenType::Id    then Send::new receiver: nil, message: token.value, tokens: [token]
+        when TokenType::Const then Send::new receiver: nil, message: token.value, tokens: [token]
         else raise TypeError, "Invalid TokenType #{token.type}"
         end
       end

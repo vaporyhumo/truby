@@ -6,6 +6,8 @@ module Truby
     enums do
       Assign = new
       Colon  = new
+      Const  = new
+      Empty  = new
       False  = new
       Id     = new
       Int    = new
