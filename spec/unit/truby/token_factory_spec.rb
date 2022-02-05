@@ -112,7 +112,7 @@ describe Truby::TokenFactory do
       specify { assert_equal actual, expected }
     end
 
-    context 'when given "A"' do
+    context 'when given "<"' do
       let(:actual) { described_class.for_char(Truby::char('<')) }
 
       specify { expect { actual }.to raise_error ArgumentError, 'Unknown char: <' }

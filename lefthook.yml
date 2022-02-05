@@ -1,0 +1,10 @@
+---
+pre-commit:
+  piped: true
+  commands:
+    1_srb:
+      run: bin/srb tc
+    2_rspec:
+      run: bin/rspec
+    3_mutant:
+      run: bin/mutant run
