@@ -115,7 +115,17 @@ describe Truby::TokenFactory do
     context 'when given "A"' do
       let(:actual) { described_class.for_char(Truby::char('<')) }
 
-      specify { expect { actual }.to raise_error ArgumentError }
+      specify { expect { actual }.to raise_error ArgumentError, 'Unknown char: <' }
+    end
+  end
+
+  describe '#tl' do
+    specify do
+      tl([[:id, 'foo']]).tap do |list|
+        expect(list).to be_a Truby::TokenList
+        expect(list.tokens.size).to eq 1
+        expect(list.tokens.first).to be_a Truby::Token
+      end
     end
   end
 end

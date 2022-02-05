@@ -55,12 +55,12 @@ describe Truby::Parser do
     specify { expect(actual).to eq(expected) }
   end
 
-  context 'when given "Boolean foo=true"' do
-    let(:input) { 'Boolean foo=true' }
-    let(:tokens) { [t(:const, 'Boolean'), t(:empty, ' '), t(:id, 'foo'), t(:assign, '='), true_token] }
-    let(:true_token) { t(:true, 'true') }
-    let(:expected) { Truby::Node::LvarAssign::new 'foo', Truby::Node::True::new([true_token]), tokens }
+  # context 'when given "Boolean foo=true"' do
+  #   let(:input) { 'Boolean foo=true' }
+  #   let(:tokens) { [t(:const, 'Boolean'), t(:empty, ' '), t(:id, 'foo'), t(:assign, '='), true_token] }
+  #   let(:true_token) { t(:true, 'true') }
+  #   let(:expected) { Truby::Node::LvarAssign::new 'foo', Truby::Node::True::new([true_token]), tokens }
 
-    specify { expect(actual).to eq(expected) }
-  end
+  #   specify { expect(actual).to eq(expected) }
+  # end
 end

@@ -15,7 +15,7 @@ module Truby
 
     sig { params(token: Token).returns Node  }
     def add token
-      raise ArgumentError, "Cannot add #{token.inspect} to #{inspect}"
+      raise ArgumentError, "Cannot add #{token} to #{inspect}"
     end
 
     sig { abstract.returns String }
