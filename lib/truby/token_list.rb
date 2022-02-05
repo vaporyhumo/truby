@@ -28,7 +28,7 @@ module Truby
       tokens.last
     end
 
-    sig { params(char: String).returns TokenList }
+    sig { params(char: Char).returns TokenList }
     def add char
       maybe_token_for_last_lexeme_with(char).then do |maybe_token|
         case maybe_token
@@ -38,7 +38,7 @@ module Truby
       end
     end
 
-    sig { params(char: String).returns NilToken }
+    sig { params(char: Char).returns NilToken }
     def maybe_token_for_last_lexeme_with char
       TokenFactory::for last_lexeme_with char
     end
@@ -48,19 +48,24 @@ module Truby
       TokenList::new [*tokens[..-2], token]
     end
 
-    sig { params(char: String).returns TokenList }
+    sig { params(char: Char).returns TokenList }
     def new_token_list_with_new_token_for char
-      TokenList::new [*tokens, T.must(TokenFactory::for(char))]
+      TokenList::new [*tokens, token_for_char(char)]
     end
 
-    sig { params(char: String).returns String }
+    sig { params(char: Char).returns Token }
+    def token_for_char char
+      TokenFactory::for_char char
+    end
+
+    sig { params(char: Char).returns String }
     def last_lexeme_with char
-      last_lexeme + char
+      last_lexeme + char.char
     end
 
     sig { returns String }
     def last_lexeme
-      last&.value || ''
+      last&.lexeme || ''
     end
   end
 end

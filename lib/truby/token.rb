@@ -2,27 +2,18 @@
 # frozen_string_literal: true
 
 module Truby
-  class Token
+  class Token < Struct
     extend Equality
 
-    define_equality :type, :value
+    define_equality :type, :lexeme
 
-    sig { params(type: Symbol, value: String).void }
-    def initialize(type, value)
-      @type = T.let(TokenType::deserialize(type.to_s), TokenType)
-      @value = value
-      freeze
-    end
-
-    sig { returns TokenType }
-    attr_reader :type
+    const :type, TokenType
+    const :lexeme, String
 
     sig { returns String }
-    attr_reader :value
-
-    sig { returns String }
-    def inspect
-      "[#{type.serialize} #{value}]"
+    def to_s
+      "[#{type.serialize} #{lexeme}]"
     end
+    alias_method :inspect, :to_s
   end
 end

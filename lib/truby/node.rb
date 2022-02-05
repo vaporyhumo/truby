@@ -4,7 +4,7 @@
 module Truby
   module Node
     extend T::Helpers
-    include Kernel
+    include ::Kernel
 
     abstract!
 

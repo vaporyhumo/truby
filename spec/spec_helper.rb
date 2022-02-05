@@ -24,4 +24,6 @@ RSpec.configure do |config|
   config.profile_examples = 0
   config.order = :random
   Kernel.srand config.seed
+
+  config.include Truby::TokenFactory
 end

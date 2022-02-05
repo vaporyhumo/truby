@@ -3,11 +3,9 @@
 
 module Truby
   module Parser
-    extend T::Sig
-
     sig { params(string: String).returns Node }
     def self.call string
-      Lexer.(string).tokens.reduce Node.empty, &public_method(:parse_step)
+      Lexer::(string).tokens.reduce(Node::empty) { parse_step _1, _2 }
     end
 
     sig { params(node: Node, token: Token).returns Node }

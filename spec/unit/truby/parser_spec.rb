@@ -5,7 +5,7 @@ describe Truby::Parser do
   describe '.parse_step' do
     specify {
       node = Truby::Node::Empty.new
-      token = Truby::Token::new(:id, 'foo')
+      token = t :id, 'foo'
       allow(node).to receive(:add).and_call_original
       Truby::Parser.parse_step(node, token)
       expect(node).to have_received(:add).with(token)
@@ -16,7 +16,7 @@ describe Truby::Parser do
     let(:actual) { described_class.call(input) }
 
     context 'when given "nil"' do
-      specify { expect(described_class.('nil')).to   eq(Truby::Node::Nil::new [Truby::Token::new(:nil, 'nil')]) }
+      specify { expect(described_class.('nil')).to eq(Truby::Node::Nil::new [t(:nil, 'nil')]) }
     end
   end
 end

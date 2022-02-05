@@ -17,7 +17,7 @@ describe Truby::Node::Send do
   describe '#add' do
     specify {
       node = Truby::Node::Send.new receiver: Truby::Node::Empty::new, message: 'foo', tokens: [t(:id, 'foo')]
-      token = Truby::Token.new(:assign, '=')
+      token = t :assign, '='
       new_node = Truby::Node::LvarAssign.new('foo', nil, [t(:id, 'foo'), token])
       expect(node.add(token)).to eq new_node
     }

@@ -3,7 +3,7 @@
 describe Truby::TokenList do
   describe '.empty' do
     specify {
-      expect(described_class.empty).to eq t([])
+      expect(described_class.empty).to eq tl([])
     }
   end
 
@@ -14,50 +14,50 @@ describe Truby::TokenList do
 
   describe '#==' do
     specify {
-      expect(t([[:id, 'foo'], [:id, 'bar']])).to eq(t([[:id, 'foo'], [:id, 'bar']]))
+      expect(tl([[:id, 'foo'], [:id, 'bar']])).to eq(tl([[:id, 'foo'], [:id, 'bar']]))
     }
 
     specify {
-      expect(t([[:id, 'foo'], [:id, 'bar']])).not_to eq(t([[:id, 'foo'], [:id, 'baz']]))
+      expect(tl([[:id, 'foo'], [:id, 'bar']])).not_to eq(tl([[:id, 'foo'], [:id, 'baz']]))
     }
 
     specify {
-      expect(t([[:id, 'foo'], [:id, 'bar']])).not_to eq(t([[:id, 'foo'], [:id, 'baz']]))
+      expect(tl([[:id, 'foo'], [:id, 'bar']])).not_to eq(tl([[:id, 'foo'], [:id, 'baz']]))
     }
 
     specify {
-      expect(t([[:id, 'foo'], [:id, 'bar']])).not_to eq(t([[:id, 'foo']]))
+      expect(tl([[:id, 'foo'], [:id, 'bar']])).not_to eq(tl([[:id, 'foo']]))
     }
   end
 
   describe '#add' do
     specify {
-      expect(t([]).add('f')).to eq t([[:id, 'f']])
+      expect(tl([]).add(Truby::Char::new(char: 'f'))).to eq tl([[:id, 'f']])
     }
 
     specify {
-      expect(t([[:id, 'f']]).add('o')).to eq t([[:id, 'fo']])
+      expect(tl([[:id, 'f']]).add(Truby::Char::new(char: 'o'))).to eq tl([[:id, 'fo']])
     }
 
     specify {
-      expect(t([[:id, 'f']]).add('=')).to eq t([[:id, 'f'], [:assign, '=']])
+      expect(tl([[:id, 'f']]).add(Truby::Char::new(char: '='))).to eq tl([[:id, 'f'], [:assign, '=']])
     }
 
     specify {
-      expect(t([[:id, 'f']]).add('=').add('f')).to eq t([[:id, 'f'], [:assign, '='], [:id, 'f']])
+      expect(tl([[:id, 'f']]).add(Truby::Char::new(char: '=')).add(Truby::Char::new(char: 'f'))).to eq tl([[:id, 'f'], [:assign, '='], [:id, 'f']])
     }
   end
 
   describe '#new_token_list_with_last_token_replaced' do
     specify {
-      expect(t([[:id, 'foo'], [:id, 'foo'], [:id, 'foo'], [:id, 'bar']]).new_token_list_with_last_token_replaced(t(:id, 'baz'))).to(
-        eq t([[:id, 'foo'], [:id, 'foo'], [:id, 'foo'], [:id, 'baz']])
+      expect(tl([[:id, 'foo'], [:id, 'foo'], [:id, 'foo'], [:id, 'bar']]).new_token_list_with_last_token_replaced(t(:id, 'baz'))).to(
+        eq tl([[:id, 'foo'], [:id, 'foo'], [:id, 'foo'], [:id, 'baz']])
       )
     }
 
     specify {
-      expect(t([[:id, 'foo'], [:id, 'foo'], [:id, 'bar']]).new_token_list_with_last_token_replaced(t(:id, 'baz'))).to(
-        eq t([[:id, 'foo'], [:id, 'foo'], [:id, 'baz']])
+      expect(tl([[:id, 'foo'], [:id, 'foo'], [:id, 'bar']]).new_token_list_with_last_token_replaced(t(:id, 'baz'))).to(
+        eq tl([[:id, 'foo'], [:id, 'foo'], [:id, 'baz']])
       )
     }
   end
