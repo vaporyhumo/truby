@@ -22,3 +22,5 @@ jobs:
       run: bin/srb tc
     - name: Run tests
       run: bin/rspec --force-color
+    - name: Run mutation tests
+      run: bin/mutant run
