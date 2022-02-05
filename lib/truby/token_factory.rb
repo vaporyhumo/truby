@@ -32,7 +32,7 @@ module Truby
 
     sig { params(type: Symbol, lexeme: String).returns Token }
     def t type, lexeme
-      Truby::TokenFactory::t type, lexeme
+      TokenFactory::t type, lexeme
     end
 
     sig { params(token_args: T::Array[[Symbol, String]]).returns TokenList }
