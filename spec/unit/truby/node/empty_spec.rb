@@ -31,6 +31,10 @@ describe Truby::Node::Empty do
     }
 
     specify {
+      expect(described_class.new.add(t(:const, 'Const'))).to eq s(:const, nil, 'Const', [t(:const, 'Const')])
+    }
+
+    specify {
       expect { described_class.new.add(t(:debug, 'foo')) }.to raise_error TypeError, 'Invalid TokenType #<Truby::TokenType::Debug>'
     }
   end
