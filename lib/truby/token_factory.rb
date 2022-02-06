@@ -12,7 +12,7 @@ module Truby
       when '-'                then :minus
       when '='                then :assign
       when ':'                then :colon
-      # when ' '                then :empty
+      when ' '                then :empty
       when /-?\d+/            then :int
       when /\A:[a-z]+\z/      then :symbol
       when /\A[a-z]+\z/       then :id
