@@ -2,8 +2,6 @@
 # frozen_string_literal: true
 
 describe Truby::Parser do
-  include Truby::TokenFactory
-
   let(:actual) { described_class.(input) }
 
   context 'when given "false"' do
@@ -55,12 +53,28 @@ describe Truby::Parser do
     specify { expect(actual).to eq(expected) }
   end
 
-  # context 'when given "Boolean foo=true"' do
-  #   let(:input) { 'Boolean foo=true' }
-  #   let(:tokens) { [t(:const, 'Boolean'), t(:empty, ' '), t(:id, 'foo'), t(:assign, '='), true_token] }
-  #   let(:true_token) { t(:true, 'true') }
-  #   let(:expected) { Truby::Node::LvarAssign::new 'foo', Truby::Node::True::new([true_token]), tokens }
+  context 'when given "Boolean"' do
+    let(:input) { 'Boolean' }
+    let(:tokens) { [t(:const, 'Boolean')] }
+    let(:expected) { Truby::Node::Const::new receiver: nil, name: 'Boolean', tokens: tokens }
 
-  #   specify { expect(actual).to eq(expected) }
-  # end
+    specify { expect(actual).to eq(expected) }
+  end
+
+  context 'when given "Boolean "' do
+    let(:input) { 'Boolean ' }
+    let(:tokens) { [t(:const, 'Boolean'), t(:empty, ' ')] }
+    let(:expected) { Truby::Node::Const::new receiver: nil, name: 'Boolean', tokens: tokens }
+
+    specify { expect(actual).to eq(expected) }
+  end
+
+  xcontext 'when given "Boolean foo=true"' do
+    let(:input) { 'Boolean foo=true' }
+    let(:tokens) { [t(:const, 'Boolean'), t(:empty, ' '), t(:id, 'foo'), t(:assign, '='), true_token] }
+    let(:true_token) { t(:true, 'true') }
+    let(:expected) { Truby::Node::LvarAssign::new 'foo', Truby::Node::True::new([true_token]), tokens }
+
+    specify { expect(actual).to eq(expected) }
+  end
 end
