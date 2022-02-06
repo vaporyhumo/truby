@@ -28,7 +28,8 @@ module Truby
     sig { params(other: Node).returns(T::Boolean) }
     def == other
       tokens.size.equal?(other.tokens.size) &&
-        tokens.zip(other.tokens).all? { |a, b| a.eql? b } && self.class.equal?(other.class)
+        tokens.zip(other.tokens).all? { |a, b| a.eql? b } &&
+        self.class.equal?(other.class)
     end
   end
 end
