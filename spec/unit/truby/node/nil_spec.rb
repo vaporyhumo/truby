@@ -3,10 +3,14 @@
 
 describe Truby::Node::Nil do
   describe '#initialize' do
-    specify { expect(described_class::new([t(:id, 'foo')]).tokens).to eq([t(:id, 'foo')]) }
+    specify { expect(described_class::new(tokens: [t(:id, 'foo')]).tokens).to eq([t(:id, 'foo')]) }
   end
 
   describe '#inspect' do
-    specify { expect(described_class::new([]).inspect).to eq '(nil)' }
+    specify { expect(described_class::new(tokens: []).inspect).to eq '(nil)' }
+  end
+
+  describe '#transpile' do
+    specify { expect(described_class::new(tokens: []).transpile).to eq 'nil' }
   end
 end

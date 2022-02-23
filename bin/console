@@ -6,4 +6,10 @@ require 'irb'
 
 require_relative '../lib/truby'
 
+require 'awesome_print'
+AwesomePrint.irb!
+
+include Truby::NodeFactory
+include Truby::TokenFactory
+
 IRB.start

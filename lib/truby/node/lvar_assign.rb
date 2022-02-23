@@ -3,35 +3,28 @@
 
 module Truby
   module Node
-    class LvarAssign
+    class LvarAssign < Struct
       include Node
 
-      sig { params(id: String, value: NilNode, tokens: T::Array[Token]).void }
-      def initialize id, value, tokens
-        @id = id
-        @value = value
-        @tokens = tokens
-      end
-
-      sig { returns String }
-      attr_reader :id
-
-      sig { returns NilNode }
-      attr_reader :value
-
-      sig { override.returns T::Array[Token] }
-      attr_reader :tokens
+      const :id, String
+      const :value, NilNode
+      const :tokens, TokenArray
 
       sig { override.returns String }
       def to_s
-        "(lvarasgn #{id} #{value.inspect})"
+        "(lvarasgn #{id} #{value.inspect} #{display_tokens})"
+      end
+
+      sig { override.returns String }
+      def transpile
+        raise
       end
 
       sig { params(token: Token).returns Node }
       def add token
         # case token.type
         # when TokenType::True then
-        LvarAssign::new id, True::new([token]), [*tokens, token]
+        LvarAssign::new id: id, value: s(:true, [token]), tokens: [*tokens, token]
         # else super
         # end
       end

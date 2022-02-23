@@ -5,6 +5,7 @@ module Truby
   module Node
     extend T::Helpers
     include ::Kernel
+    include NodeFactory
 
     abstract!
 
@@ -15,7 +16,7 @@ module Truby
 
     sig { params(token: Token).returns Node  }
     def add token
-      raise ArgumentError, "Cannot add #{token} to #{inspect}"
+      raise ArgumentError, "Cannot add #{token} to #{self}"
     end
 
     sig { abstract.returns String }
@@ -27,9 +28,20 @@ module Truby
 
     sig { params(other: Node).returns(T::Boolean) }
     def == other
-      tokens.size.equal?(other.tokens.size) &&
-        tokens.zip(other.tokens).all? { |a, b| a.eql? b } &&
-        self.class.equal?(other.class)
+      serialize == other.serialize
+    end
+
+    sig { abstract.returns T::Hash[String, T::untyped] }
+    def serialize
+    end
+
+    sig { returns String }
+    def display_tokens
+      "[#{tokens.map(&:to_s).join(' ')}]"
+    end
+
+    sig { abstract.returns String }
+    def transpile
     end
   end
 end

@@ -3,25 +3,24 @@
 
 module Truby
   module Node
-    class Empty
+    class Empty < Struct
       include Node
 
-      sig { params(tokens: T::Array[Token]).void }
-      def initialize tokens = []
-        @tokens = T.let(tokens, T::Array[Token])
-      end
+      const :tokens, TokenArray, factory: ->() { [] }
 
-      sig { override.returns T::Array[Token] }
-      attr_reader :tokens
+      sig { override.returns String }
+      def transpile
+        ''
+      end
 
       sig { params(token: Token).returns Node }
       def add token
         case token.type
-        when TokenType::False then False::new [token]
-        when TokenType::Nil   then Nil::new [token]
-        when TokenType::True  then True::new [token]
-        when TokenType::Int   then Int::new token.lexeme, [token]
-        when TokenType::Id    then Send::new receiver: nil, message: token.lexeme, tokens: [token]
+        when TokenType::False then s :false, [token]
+        when TokenType::Nil   then s :nil, [token]
+        when TokenType::True  then s :true, [token]
+        when TokenType::Int   then s :int, token.lexeme, [token]
+        when TokenType::Id    then Send::new message: token.lexeme, tokens: [token]
         when TokenType::Const then Const::new name: token.lexeme, tokens: [token]
         else raise TypeError, "Invalid TokenType #{token.type}"
         end

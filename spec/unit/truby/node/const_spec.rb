@@ -16,8 +16,14 @@ describe Truby::Node::Const do
       let(:actual) { s(:const, nil, 'Const', [t(:const, 'Const')]).add(t(:const, 'Const')) }
 
       specify do
-        expect { actual  }.to raise_error TypeError, 'Invalid TokenType const'
+        expect { actual }.to raise_error TypeError, 'Invalid TokenType const'
       end
+    end
+
+    describe '#transpile' do
+      specify {
+        expect(s(:const, nil, 'Const').transpile).to eq 'Const'
+      }
     end
   end
 end

@@ -3,10 +3,14 @@
 
 describe Truby::Node::True do
   describe '#initialize' do
-    specify { expect(described_class::new([t(:id, 'foo')]).tokens).to eq([t(:id, 'foo')]) }
+    specify { expect(described_class::new(tokens: [t(:id, 'foo')]).tokens).to eq([t(:id, 'foo')]) }
   end
 
-  describe '#inspect' do
-    specify { expect(described_class::new([]).inspect).to eq '(true)' }
+  describe '#to_s' do
+    specify { expect(described_class::new(tokens: []).to_s).to eq '(true)' }
+  end
+
+  describe '#transpile' do
+    specify { expect(described_class::new(tokens: []).transpile).to eq 'true' }
   end
 end

@@ -3,23 +3,19 @@
 
 module Truby
   module Node
-    class Int
+    class Int < Struct
       include Node
 
-      sig { params(value: T.untyped, tokens: T::Array[Token]).void }
-      def initialize value, tokens
-        @value = value
-        @tokens = tokens
-      end
-
-      sig { returns T.untyped }
-      attr_reader :value
-
-      sig { override.returns T::Array[Token] }
-      attr_reader :tokens
+      const :value, String
+      const :tokens, TokenArray
 
       sig { override.returns String }
-      def inspect
+      def transpile
+        value
+      end
+
+      sig { override.returns String }
+      def to_s
         "(int #{value})"
       end
     end

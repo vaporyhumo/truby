@@ -6,10 +6,10 @@ describe Truby::Node::LvarAssign do
     context 'when token type is true' do
       specify {
         true_token = t(:true, 'true')
-        node = Truby::Node::True::new([true_token])
+        node = s(:true, [true_token])
         foo_token = t(:id, 'foo')
-        actual = Truby::Node::LvarAssign::new('foo', nil, [foo_token]).add(true_token)
-        expected = Truby::Node::LvarAssign::new('foo', node, [foo_token, true_token])
+        actual = s(:lvar_assign, 'foo', nil, [foo_token]).add(true_token)
+        expected = s(:lvar_assign, 'foo', node, [foo_token, true_token])
         expect(actual).to eq(expected)
         expect(actual.value).to eq(node)
       }
@@ -18,8 +18,15 @@ describe Truby::Node::LvarAssign do
 
   describe '#to_s' do
     specify {
-      actual = Truby::Node::LvarAssign::new('foo', nil, [t(:id, 'foo')]).to_s
-      expect(actual).to eq('(lvarasgn foo nil)')
+      actual = s(:lvar_assign, 'foo', nil, [t(:id, 'foo')]).to_s
+      expect(actual).to eq('(lvarasgn foo nil [[id foo]])')
     }
   end
+
+  describe '#transpile' do
+    let(:node) { s :lvar_assign, 'foo', nil, [] }
+
+    specify { expect { node.transpile }.to raise_error RuntimeError }
+  end
 end
+

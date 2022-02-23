@@ -3,17 +3,15 @@
 
 module Truby
   module Node
-    class Nil
-      include Equality
+    class Nil < Struct
       include Node
 
-      sig { params(tokens: T::Array[Token]).void }
-      def initialize tokens
-        @tokens = tokens
-      end
+      const :tokens, TokenArray, factory: ->() { [] }
 
-      sig { override.returns T::Array[Token] }
-      attr_reader :tokens
+      sig { override.returns String }
+      def transpile
+        'nil'
+      end
 
       sig { override.returns String }
       def inspect

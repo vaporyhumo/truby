@@ -9,28 +9,35 @@ integration: rspec
 
 matcher:
   subjects:
+    # - Truby*
     - Truby
+    # - Truby::Char
     - Truby::Config
     - Truby::Equality
+    # - Truby::Kernel
     - Truby::Lexer
-    - Truby::Node
+    # - Truby::Node
+    # - Truby::NodeFactory
+    - Truby::Node::Const
     - Truby::Node::Empty
     - Truby::Node::False
     - Truby::Node::Int
-    - Truby::Node::LvarAssign
+    # - Truby::Node::LvarAssign
     - Truby::Node::Nil
-    - Truby::Node::Send
+    # - Truby::Node::Send
+    # - Truby::Node::TSend
+    # - Truby::Node::Tlvar_Assign
     - Truby::Node::True
+    # - Truby::Object
     - Truby::Parser
     - Truby::Singleton
+    - Truby::Struct
     - Truby::TokenFactory
     - Truby::TokenList
     - Truby::TokenType
     - Truby::Token
   ignore:
-    - Truby::Node#inspect
     - Truby::Node#tokens
     - Truby::TokenList#new_token_list_with_new_token_for
-    - Truby::Token#initialize
 
 fail_fast: false

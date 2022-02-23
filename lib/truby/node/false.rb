@@ -3,19 +3,17 @@
 
 module Truby
   module Node
-    class False
-      include Equality
+    class False < Struct
       include Node
 
-      sig { params(tokens: T::Array[Token]).void }
-      def initialize tokens
-        @tokens = tokens
+      const :tokens, TokenArray
+
+      sig { override.returns String }
+      def transpile
+        'false'
       end
 
-      sig { override.returns T::Array[Token] }
-      attr_reader :tokens
-
-      sig {override.returns(String)}
+      sig { override.returns String }
       def inspect
         '(false)'
       end

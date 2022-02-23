@@ -3,19 +3,19 @@
 
 module Truby
   module Node
-    class Send < Struct
+    class TSend < Struct
       include Node
 
+      const :type, Const
       const :receiver, NilNode
       const :message, String
       const :tokens, T::Array[Token]
 
-      sig { params(token: Token).returns Node }
+      sig { override.params(token: Token).returns Node }
       def add token
         # case token.type
         # when TokenType::Assign then
-        s :lvar_assign, message, nil, [*tokens, token]
-        # else super
+        s(:tlvar_assign, type, message, nil, [*tokens, token])
         # end
       end
 
@@ -25,8 +25,8 @@ module Truby
       end
 
       sig { override.returns String }
-      def inspect
-        "(send #{receiver.inspect} #{message})"
+      def to_s
+        "(tsend #{type} #{receiver || 'nil'} #{message} #{display_tokens})"
       end
     end
   end
